@@ -1,0 +1,23 @@
+.custom-brand{
+    background: rgb(4, 7, 41);
+    padding: 0.5rem;
+    border: 1px solid white;
+    color: white;
+}
+
+.navbar{
+    background: linear-gradient(to right, #13547a  , #1e3c72) !important;
+}
+
+.nav-link{ 
+    margin-left: 2rem;
+    font-size: 1.3rem !important;
+    transition: all 1s linear !important;
+}
+
+.nav-link:hover, .nav-link.active{
+  
+   background: white;
+   color: rgb(15, 15, 46) !important;
+   border-radius: 5px;
+}
