@@ -4,8 +4,7 @@ import AuthContext from "../context/auth-context";
 
 class RegisterPage extends Component {
   state = {
-    isLogin: true,
-   
+    isLogin: true
   };
 
   static contextType = AuthContext;
@@ -40,7 +39,7 @@ class RegisterPage extends Component {
     const data = { name, email, password };
 
     if (this.state.isLogin) {
-      fetch(`http://localhost:5000/login`, {
+      fetch(`https://singhprince123-nodejs-login-app.glitch.me/login`, {
         method: "Post",
         body: JSON.stringify(data),
         headers: {
@@ -49,9 +48,7 @@ class RegisterPage extends Component {
       })
         .then(res => {
           if (res.status !== 200 && res.status !== 201) {
-           
             console.log(res);
-           
           }
 
           return res.json();
@@ -62,17 +59,16 @@ class RegisterPage extends Component {
             localStorage.setItem("token", resdata.token);
             localStorage.setItem("name", resdata.name);
           }
-          if(resdata.message){
+          if (resdata.message) {
             alert(resdata.message);
           }
-          
         })
         .catch(err => {
           console.log(err);
           alert(err.message);
         });
     } else {
-      fetch(`http://localhost:5000/register`, {
+      fetch(`https://singhprince123-nodejs-login-app.glitch.me/register`, {
         method: "Post",
         body: JSON.stringify(data),
         headers: {
@@ -83,8 +79,7 @@ class RegisterPage extends Component {
           if (res.status !== 200 && res.status !== 201) {
             this.setState({ error: true });
             console.log(res);
-          
-          } 
+          }
           return res.json();
         })
         .then(resdata => {
@@ -102,7 +97,6 @@ class RegisterPage extends Component {
   render() {
     return (
       <div className="form-container p-3 my-5">
-       
         <form className="Register-form" onSubmit={this.submitHandler}>
           <div className="form-group">
             <label htmlFor="name">Name </label>
