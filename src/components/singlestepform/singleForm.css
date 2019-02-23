@@ -1,0 +1,11 @@
+/* .form-container {
+  width: 100px;
+  height: 300px;
+} */
+
+.name, .email-gender, .favsub-adrs{
+    padding: 0.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap : 0.5rem;
+}

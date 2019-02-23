@@ -5,13 +5,14 @@ import StudentForm from '../StudentForm'
 import Backdrop from '../Backdrop/Backdrop';
 import AuthContext from '../../components/context/auth-context'
 import { connect } from 'react-redux'
+import * as actionCreators from '../../store/actions/actions'
 
  class StudentList extends Component {
 
 
   render() {
-     console.log("state =", this.props.stdsArray)
-
+     console.log("state =", this.props)
+    {!this.props.updating && this.props.fetchAll()}
     return (
       <AuthContext.Consumer>
         { values => {
@@ -58,13 +59,19 @@ import { connect } from 'react-redux'
   }
 }
 
-const mapStatToProps = ( state ) => {
+const mapStateToProps = ( state ) => {
   return {
-    stdsArray : state.list.studentsData
+    stdsArray : state.list.studentsData,
+    updating: state.list.updating,
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchAll:  () => dispatch(actionCreators.fetchAllStudent())
+  }
+}
 
-export default connect(mapStatToProps, null)(StudentList)
+export default connect(mapStateToProps, mapDispatchToProps)(StudentList)
 
 

@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import AuthContext from '../context/auth-context'
 
 export default function Navigation() {
+let token = localStorage.getItem('token');
  return  <AuthContext.Consumer>
     { context => {
       return (
@@ -14,26 +15,24 @@ export default function Navigation() {
         </button>
         <div className="collapse navbar-collapse" id="collapsibleNavbar">
           <ul className="navbar-nav ml-auto">
-            {!context.token && 
+            {/* {!context.token &&  */}
+            {! token &&
             (<li className="nav-item">
               <NavLink to="/login" className="nav-link">Login</NavLink>
             </li>
             )}
-            {context.token && 
+            {token && 
+            <React.Fragment>
             (<li className="nav-item">
               <NavLink to="/dashboard" className="nav-link text-capialize">Dashboard</NavLink>
-            </li>
-            )}
-            { context.token &&  
-            ( <li className="nav-item">
+            </li> 
+             <li className="nav-item">
               <NavLink to="/students" className="nav-link text-capitalize">student list</NavLink>
             </li>
-            )}
-            {
-              context.token && 
-              (<li className="nav-item">
+              <li className="nav-item">
               <p onClick={context.logOut} className="nav-link text-capitalize">log out</p>
-            </li>)
+            </li>
+            </React.Fragment>
             }
            
           </ul>

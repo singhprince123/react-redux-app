@@ -10,7 +10,8 @@ import listReducer from '../src/store/reducers/listReducers'
 
 const reducers  = combineReducers({
     list: listReducer,
-    form: formReducer
+    form: formReducer,
+    
 })
 
 const store = createStore(reducers)

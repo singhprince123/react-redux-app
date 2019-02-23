@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from '../Modal/Modal'
 import Backdrop from '../Backdrop/Backdrop'
-import StudentForm from '../StudentForm'
+import SingleForm from '../singlestepform/singleForm'
 import {connect} from 'react-redux'
 import  * as actionCreators from '../../store/actions/actions'
 
@@ -10,11 +10,13 @@ import  * as actionCreators from '../../store/actions/actions'
     const { id , firstName, lastName ,  email , address , sex , favouriteSubject  } = props.values;
     const { deleteStudentData,  showModalHandler, closeModalHandler, addingStudent}  = props
     const name = firstName + " " + lastName;
+    console.log("updating", props.dataUpdating);
   return (
       <React.Fragment>
-        {props.updating && <Backdrop />}
-        {props.updating && 
-           <Modal title="Student Detail Form"  onCancelModal={() => closeModalHandler()} canCancel><StudentForm values={props.values}/></Modal> }
+
+        {props.dataUpdating && <Backdrop />}
+        {props.dataUpdating && 
+           <Modal title="Student Detail Form"  onCancelModal={() => props.closeModalAction()} canCancel><SingleForm data={props} /></Modal> }
         <div className="col-md-6 col-lg-4 mb-3">
           <div className="card p-3">
              <h2 className="text-capitalize text-center">student details</h2>
@@ -41,7 +43,7 @@ import  * as actionCreators from '../../store/actions/actions'
 
 const mapStateToProps = state => {
   return {
-    list : state.list.updating
+    dataUpdating : state.list.updating
   }
 }
 
@@ -49,7 +51,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return{
       deleteStudent: (id) => dispatch(actionCreators.deleteStudent(id)),
-      singleStudentData : (values) => dispatch(actionCreators.singleStudentData(values))
+      singleStudentData : (values) => dispatch(actionCreators.singleStudentData(values)),
+      closeModalAction: ()=> dispatch(actionCreators.closeModal())
 
     };
   
